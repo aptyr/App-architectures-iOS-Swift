@@ -16,7 +16,10 @@
 
 import Foundation
 
-class UsersPresenter : UsersPresenterProtocol, FetchUsersProtocol {
+class UsersPresenter : UsersPresenterProtocol, FetchUsersProtocol, FetchUserProtocol {
+    
+    private var dataSource: [User] = [User]()
+    private var indexPathCellToExpand: IndexPath?
     
     var view : UsersController?
     
@@ -36,6 +39,33 @@ class UsersPresenter : UsersPresenterProtocol, FetchUsersProtocol {
     }
     
     func usersFetched(_ users: [User]?) {
-        view?.invalidateView(users)
+        if let data = users {
+            dataSource += data
+        }
+        
+        view?.invalidateView(data())
+    }
+    
+    func userFetched(_ user: User?) {
+        if let indexPath = indexPathCellToExpand {
+            data().filter { $0.login == user?.login }.forEach {
+                $0.email = user?.email
+                $0.name = user?.name
+                $0.createdAt = user?.createdAt
+            }
+            view?.expandCell(indexPath)
+        }
+    }
+    
+    func tableViewItemClicked(_ indexPath: IndexPath) {
+        indexPathCellToExpand = indexPath
+        
+        if let login = data()[indexPath.item].login {
+            api.getUser(login, callback: self)
+        }
+    }
+    
+    func data() -> [User] {
+        return dataSource
     }
 }

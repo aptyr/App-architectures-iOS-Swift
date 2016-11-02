@@ -21,7 +21,8 @@ class UsersController: UIViewController, UsersViewProtocol {
     @IBOutlet weak var tableView: UITableView!
     
     var presenter : UsersPresenter!
-    public var dataSource: [User] = [User]()
+    
+    var selectedCell: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,10 +45,17 @@ class UsersController: UIViewController, UsersViewProtocol {
     }
     
     func invalidateView(_ users: [User]?) {
-        if users != nil {
-            dataSource += users!
+        if let _ = users {
             tableView.reloadData()
         }
+    }
+    
+    func expandCell(_ indexPath: IndexPath) {
+        selectedCell = indexPath
+        tableView.beginUpdates()
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+        tableView.endUpdates()
+        
     }
     
     

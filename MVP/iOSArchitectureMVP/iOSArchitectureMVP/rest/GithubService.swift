@@ -19,4 +19,6 @@ protocol GithubService {
     
     func getUsers(_ since:Int, callback: FetchUsersProtocol)
     
+    func getUser(_ login: String, callback: FetchUserProtocol)
+    
 }

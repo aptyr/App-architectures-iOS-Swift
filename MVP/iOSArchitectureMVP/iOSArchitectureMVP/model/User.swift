@@ -34,6 +34,15 @@ public class User {
     public var received_events_url : String?
     public var type : String?
     public var site_admin : String?
+    public var name : String?
+    public var email : String?
+    public var createdAt : Date?
+    
+    public var since : Date? {
+        get {
+            return createdAt
+        }
+    }
     
     required public init?(json:JSON) {
         
@@ -54,6 +63,9 @@ public class User {
         received_events_url = json["received_events_url"].string
         type = json["type"].string
         site_admin = json["site_admin"].string
+        name = json["name"].string
+        email = json["email"].string
+        createdAt = json["created_at"].date
     }
     
     

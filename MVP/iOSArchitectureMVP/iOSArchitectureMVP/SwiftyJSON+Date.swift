@@ -14,19 +14,20 @@
  * limitations under the License.
  */
 
-import UIKit
+import SwiftyJSON
 
-extension UsersController: UITableViewDelegate {
+extension JSON {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        getPresenter().tableViewItemClicked(indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if selectedCell == indexPath {
-                return 115
+    public var date: Date? {
+        get {
+            switch self.type {
+                case .string:
+                    return JsonDateFormatter.dateFormatter.date(from: self.object as! String)
+                default:
+                    return nil
+            }
         }
-        
-        return tableView.rowHeight
     }
+    
+    
 }

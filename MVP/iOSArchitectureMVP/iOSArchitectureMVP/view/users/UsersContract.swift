@@ -19,10 +19,17 @@ import Foundation
 protocol UsersPresenterProtocol : BasePresenterProtocol {
     
     func getUsers(since: Int)
+    
+    func tableViewItemClicked(_ indexPath: IndexPath)
+    
+    func data() -> [User]
+    
 }
 
 protocol UsersViewProtocol : BaseViewProtocol {
     
     func invalidateView(_ users: [User]?)
+    
+    func expandCell(_ indexPath: IndexPath)
     
 }

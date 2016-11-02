@@ -19,8 +19,11 @@ import Kingfisher
 
 class UsersTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var name: UILabel!
     @IBOutlet weak var avatar: UIImageView!
+    @IBOutlet weak var login: UILabel!
+    @IBOutlet weak var longName: UILabel!
+    @IBOutlet weak var email: UILabel!
+    @IBOutlet weak var since: UILabel!
     
     func setUser(_ user: User?) {
         
@@ -28,8 +31,24 @@ class UsersTableViewCell: UITableViewCell {
             avatar.kf.setImage(with: URL(string: url), placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
         }
         
-        name.text = user?.login
+        login.text = user?.login
         
+        if let userName = user?.name {
+            longName.text = userName
+        } else {
+            longName.text = "No name"
+        }
         
+        if let userEmail = user?.email {
+            email.text = userEmail
+        } else {
+            email.text =  "No email"
+        }
+        
+        if let userRegisterDate = user?.since {
+            since.text = JsonDateFormatter.dateFormatter2.string(from: userRegisterDate)
+        } else {
+            since.text = "No register date"
+        }
     }
 }

@@ -23,12 +23,12 @@ extension UsersController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
+        return getPresenter().data().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "usersTableViewCell", for: indexPath) as! UsersTableViewCell
-        cell.setUser(dataSource[(indexPath as NSIndexPath).row])
+        cell.setUser(getPresenter().data()[(indexPath as NSIndexPath).row])
         return cell
 
     }
