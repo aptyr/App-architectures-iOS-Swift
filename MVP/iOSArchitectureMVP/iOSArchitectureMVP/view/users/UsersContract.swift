@@ -28,7 +28,7 @@ protocol UsersPresenterProtocol : BasePresenterProtocol {
 
 protocol UsersViewProtocol : BaseViewProtocol {
     
-    func invalidateView(_ users: [User]?)
+    func invalidateView()
     
     func expandCell(_ indexPath: IndexPath)
     

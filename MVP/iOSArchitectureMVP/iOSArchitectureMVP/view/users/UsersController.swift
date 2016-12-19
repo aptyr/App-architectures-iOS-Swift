@@ -44,10 +44,8 @@ class UsersController: UIViewController, UsersViewProtocol {
         return presenter
     }
     
-    func invalidateView(_ users: [User]?) {
-        if let _ = users {
-            tableView.reloadData()
-        }
+    func invalidateView() {
+        tableView.reloadData()
     }
     
     func expandCell(_ indexPath: IndexPath) {

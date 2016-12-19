@@ -39,11 +39,12 @@ class UsersPresenter : UsersPresenterProtocol, FetchUsersProtocol, FetchUserProt
     }
     
     func usersFetched(_ users: [User]?) {
-        if let data = users {
-            dataSource += data
+        guard let data = users  else {
+            return
         }
         
-        view?.invalidateView(data())
+        dataSource += data
+        view?.invalidateView()
     }
     
     func userFetched(_ user: User?) {
