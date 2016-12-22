@@ -29,4 +29,10 @@ extension UsersController: UITableViewDelegate {
         
         return tableView.rowHeight
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.item == getPresenter().data().count - 1{ 
+            getPresenter().getUsers(since: getPresenter().data().count - 1)
+        }
+    }
 }

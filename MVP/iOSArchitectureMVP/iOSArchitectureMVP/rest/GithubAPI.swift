@@ -33,7 +33,7 @@ class GithubAPI : GithubService {
     
     func getUsers(_ since: Int, callback: FetchUsersProtocol) {
     
-        Alamofire.request(GithubAPI.SERVICE_ENDPOINT + "?since=0").responseJSON { response in
+        Alamofire.request(GithubAPI.SERVICE_ENDPOINT + "?since=\(since)").responseJSON { response in
             if let jsonValue = response.result.value {
                 var result = [User]()
                 JSON(jsonValue).arrayValue.forEach { result.append(User(json: $0)!) }
